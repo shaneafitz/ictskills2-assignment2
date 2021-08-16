@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -13,6 +13,8 @@ import StarRateIcon from "@material-ui/icons/StarRate";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import img from '../../images/film-poster-placeholder.png'
+import { Link } from "react-router-dom";
+import { MoviesContext } from "../../contexts/moviesContext";
 
 const useStyles = makeStyles({
   card: { maxWidth: 345 },
@@ -22,9 +24,9 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TVCard(props) {
+export default function TVCard({ tvShow }) {
   const classes = useStyles();
-  const tvShow = props.tvShow;
+  // const tvShow = props.tvShow;
   return (
     <Card className={classes.card}>
       <CardHeader className={classes.header} title={tvShow.title} />
@@ -41,7 +43,7 @@ export default function TVCard(props) {
           <Grid item xs={6}>
             <Typography variant="h6" component="p">
               <CalendarIcon fontSize="small" />
-              {tvShow.release_date}
+              {tvShow.first_air_date}
             </Typography>
           </Grid>
           <Grid item xs={6}>
@@ -56,9 +58,11 @@ export default function TVCard(props) {
         <IconButton aria-label="add to favorites" onClick={null}>
           <FavoriteIcon color="primary" fontSize="large" />
         </IconButton>
-        <Button variant="outlined" size="medium" color="primary">
-          More Info ...
-        </Button>
+        <Link to={`/tvShows/${tvShow.id}`}>
+          <Button variant="outlined" size="medium" color="primary">
+            More Info ...
+          </Button>
+        </Link>
       </CardActions>
     </Card>
   );

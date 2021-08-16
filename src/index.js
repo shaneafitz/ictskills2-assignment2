@@ -14,6 +14,7 @@ import AddMovieReviewPage from './pages/addMovieReviewPage';
 import PopularMoviesPage from "./pages/popularMoviesPage";
 import TopRatedMoviesPage from "./pages/topRatedMoviesPage";
 import TvShowsPage from "./pages/tvShowsPage";
+import tvShowDetailsPage from "./pages/tvShowDetailsPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,14 +33,15 @@ const App = () => {
         <SiteHeader />      {/* New Header  */}
         <MoviesContextProvider>
           {" "}
-          <Switch>
-            <Route exact path="/tvShows" component={TvShowsPage} />
+          <Switch>            
             <Route exact path="/movies/toprated" component={TopRatedMoviesPage} />
             <Route exact path="/movies/popular" component={PopularMoviesPage} />
             <Route exact path="/reviews/form" component={AddMovieReviewPage} />
             <Route exact path="/movies/upcoming" component={UpcomingMoviesPage} />
             <Route path="/reviews/:id" component={MovieReviewPage} />
             <Route exact path="/movies/favorites" component={FavoriteMoviesPage} />
+            <Route path="/tvShows/:id" component={tvShowDetailsPage} />
+            <Route exact path="/tvShows" component={TvShowsPage} />
             <Route path="/movies/:id" component={MoviePage} />
             <Route exact path="/" component={HomePage} />
             <Redirect from="*" to="/" />

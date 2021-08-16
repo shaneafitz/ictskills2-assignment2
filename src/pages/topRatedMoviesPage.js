@@ -6,7 +6,7 @@ import Spinner from '../components/spinner'
 import AddToWatchIcon from '../components/cardIcons/addToWatchList';
 
 const TopRatedMoviesPage = (props) => {
-  const {  data, error, isLoading, isError }  = useQuery('popular', getTopRated)
+  const {  data, error, isLoading, isError }  = useQuery('top rated', getTopRated)
 
   if (isLoading) {
     return <Spinner />
