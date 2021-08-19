@@ -1,14 +1,15 @@
 import React from "react";
-import TVCard from "../components/tvCard";
-import SampleTvShow from "./tvSampleData";
+import CastCard from "../components/castCard";
+import SampleCast from "./castSampleData";
 import { MemoryRouter } from "react-router";
 import MoviesContextProvider from "../contexts/moviesContext";
 import { action } from "@storybook/addon-actions";
 import AddToFavoritesIcon from "../components/cardIcons/addToFavorites";
 
+
 export default {
-  title: "TV Home Page/TVCard",
-  component: TVCard,
+  title: "Cast Page/CastCard",
+  component: CastCard,
   decorators: [
     (Story) => <MemoryRouter initialEntries={["/"]}>{Story()}</MemoryRouter>,
     (Story) => <MoviesContextProvider>{Story()}</MoviesContextProvider>,
@@ -17,22 +18,20 @@ export default {
 
 export const Basic = () => {
   return (
-    <TVCard
-      tvShow={SampleTvShow}
-      action={(tvShow) => <AddToFavoritesIcon tvShow={tvShow} />}
-      taging={(tvShow) => null}
+    <CastCard
+      cast={SampleCast}
+      taging={(cast) => null}
     />
   );
 };
 Basic.storyName = "Default";
 
 export const Exceptional = () => {
-  const sampleNoPoster = { ...SampleTvShow, poster_path: undefined };
+  const sampleNoPoster = { ...SampleCast, profile_path: undefined };
   return (
-    <TVCard
-      tvShow={sampleNoPoster}
-      action={(tvShow) => <AddToFavoritesIcon tvShow={tvShow} />}
-      taging={(tvShow) => null}
+    <CastCard
+      cast={sampleNoPoster}
+      taging={(cast) => null}
     />
   );
 };

@@ -15,6 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import img from '../../images/film-poster-placeholder.png'
 import { Link } from "react-router-dom";
 import { MoviesContext } from "../../contexts/moviesContext";
+import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles({
   card: { maxWidth: 345 },
@@ -24,12 +25,32 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TVCard({ tvShow }) {
+export default function TVCard({ tvShow, action }) {
   const classes = useStyles();
   // const tvShow = props.tvShow;
+  const { favorites } = useContext(MoviesContext);
+
+  if (favorites.find((id) => id === tvShow.id)) {
+    tvShow.favorite = true;
+  } else {
+    tvShow.favorite = false
+  }
+
+  // const handleAddToFavorite = (e) => {
+  //   e.preventDefault();
+  //   addToFavorites(movie);
+  // };
   return (
     <Card className={classes.card}>
-      <CardHeader className={classes.header} title={tvShow.title} />
+      <CardHeader className={classes.header} 
+       avatar={
+        tvShow.favorite ? (
+          <Avatar className={classes.avatar}>
+            <FavoriteIcon />
+          </Avatar>
+        ) : null
+      }
+      title={tvShow.name} />
       <CardMedia
         className={classes.media}
         image={

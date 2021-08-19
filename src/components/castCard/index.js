@@ -8,14 +8,13 @@ import CardHeader from "@material-ui/core/CardHeader";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import CalendarIcon from "@material-ui/icons/CalendarTodayTwoTone";
+import PersonIcon  from "@material-ui/icons/Person";
 import StarRateIcon from "@material-ui/icons/StarRate";
-// import IconButton from "@material-ui/core/IconButton";
-import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
+import img from '../../images/film-poster-placeholder.png'
 import { Link } from "react-router-dom";
 import { MoviesContext } from "../../contexts/moviesContext";
-import img from '../../images/film-poster-placeholder.png'
 
 const useStyles = makeStyles({
   card: { maxWidth: 345 },
@@ -25,42 +24,17 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MovieCard({ movie, action }) {
+export default function CastCard({ cast }) {
   const classes = useStyles();
-  const { favorites } = useContext(MoviesContext);
-
-  if (favorites.find((id) => id === movie.id)) {
-    movie.favorite = true;
-  } else {
-    movie.favorite = false
-  }
-
-  // const handleAddToFavorite = (e) => {
-  //   e.preventDefault();
-  //   addToFavorites(movie);
-  // };
+  
   return (
     <Card className={classes.card}>
-      <CardHeader
-        className={classes.header}
-        avatar={
-          movie.favorite ? (
-            <Avatar className={classes.avatar}>
-              <FavoriteIcon />
-            </Avatar>
-          ) : null
-        }
-        title={
-          <Typography variant="h5" component="p">
-            {movie.title}{" "}
-          </Typography>
-        }
-      />
+      <CardHeader className={classes.header} title={cast.name} />
       <CardMedia
         className={classes.media}
         image={
-          movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+            cast.profile_path
+            ? `https://image.tmdb.org/t/p/w500/${cast.profile_path}`
             : img
         }
       />
@@ -68,28 +42,24 @@ export default function MovieCard({ movie, action }) {
         <Grid container>
           <Grid item xs={6}>
             <Typography variant="h6" component="p">
-              <CalendarIcon fontSize="small" />
-              {movie.release_date}
+              <PersonIcon fontSize="small" />
+              {cast.character}
             </Typography>
           </Grid>
           <Grid item xs={6}>
             <Typography variant="h6" component="p">
               <StarRateIcon fontSize="small" />
-              {"  "} {movie.vote_average}{" "}
+              {"  "} {cast.popularity}{" "}
             </Typography>
           </Grid>
         </Grid>
       </CardContent>
-      <CardActions >
-        {action(movie)}
-        <Link to={`/movies/${movie.id}`}>
+      <CardActions >      
+        <Link to={`/movies/${cast.id}/info`}>
           <Button variant="outlined" size="medium" color="primary">
             More Info ...
           </Button>
         </Link>
-        <Button variant="outlined" size="medium" color="primary">
-          Cast
-        </Button>
       </CardActions>
     </Card>
   );
