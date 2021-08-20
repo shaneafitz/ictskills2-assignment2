@@ -118,13 +118,26 @@ export const getTvShow = async (args) => {
   return response.json();
 };
 
-export const getMovieCast = (id) => {
-  return fetch(
-    `https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+// export const getMovieCast = (id) => {
+//   return fetch(
+//     `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+//   )
+//     .then((res) => res.json())
+//     .then((json) => {
+//       // console.log(json.results);
+//       return json.results;
+//     });
+// };
+
+
+export const getMovieCast  = async ({ queryKey }) => {
+  // eslint-disable-next-line no-unused-vars
+  const [prefix, { id }] = queryKey;
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
   )
-    .then((res) => res.json())
-    .then((json) => {
-      // console.log(json.results);
-      return json.results;
-    });
+  if (!response.ok) {
+    throw new Error(response.json().message);
+  }
+  return response.json();
 };
