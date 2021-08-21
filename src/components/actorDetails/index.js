@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Chip from "@material-ui/core/Chip";
 import Paper from "@material-ui/core/Paper";
 // import AccessTimeIcon from "@material-ui/icons/AccessTime";
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ActorDetails = ({ actor }) => {
     const classes = useStyles();
-    const [drawerOpen, setDrawerOpen] = useState(false);
+    // const [drawerOpen, setDrawerOpen] = useState(false);
 
     return (
         <>
